@@ -1,0 +1,44 @@
+// Gmsh project created on Wed Nov  8 14:22:24 2017
+Point(1) = {0, 0, 0, 1.0};
+Point(2) = {-1, 0, 0, 1.0};
+Point(3) = {1, 0, 0, 1.0};
+Point(4) = {0, -1, 0, 1.0};
+Point(5) = {0, 1, 0, 1.0};
+Point(6) = {0, 0, -1, 1.0};
+Point(7) = {0, 0, 1, 1.0};
+Circle(1) = {2, 7, 5};
+Delete {
+  Line{1};
+}
+Circle(1) = {2, 1, 5};
+Circle(2) = {5, 1, 3};
+Circle(3) = {7, 1, 4};
+Circle(4) = {4, 1, 6};
+Circle(5) = {2, 1, 4};
+Circle(6) = {4, 1, 3};
+Circle(7) = {5, 1, 6};
+Circle(8) = {7, 1, 5};
+Circle(9) = {7, 1, 2};
+Circle(10) = {2, 1, 6};
+Circle(11) = {6, 1, 3};
+Circle(12) = {3, 1, 7};
+Line Loop(13) = {10, -4, -3, 8, -1, 5, -3, 8, -1, 5, -3, 8};
+Ruled Surface(14) = {13};
+Line Loop(15) = {10, 11, 12, 9};
+Line Loop(16) = {5, -3, 8, -1, 5, -3, 8, -1};
+Plane Surface(17) = {15, 16};
+Line Loop(18) = {12, 9, 1, 2};
+Ruled Surface(19) = {18};
+Line Loop(20) = {1, 7, -10};
+Ruled Surface(21) = {20};
+Line Loop(22) = {2, -11, -7};
+Ruled Surface(23) = {22};
+Line Loop(24) = {6, -2, -1, 5};
+Ruled Surface(25) = {24};
+Line Loop(26) = {9, 10, -4, -3};
+Ruled Surface(27) = {26};
+Line Loop(28) = {12, 8, 7, 11};
+Ruled Surface(29) = {28};
+Ruled Surface(30) = {26};
+Line Loop(31) = {2, -11, -10, 1};
+Ruled Surface(32) = {31};
