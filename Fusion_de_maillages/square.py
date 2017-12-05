@@ -22,6 +22,7 @@ Generate Meshed Polygons
 
 
 from matplotlib import pyplot as plt
+from math import cos,sin,pi
 
 
 
@@ -257,14 +258,14 @@ def regular_polygon(n,r=1,c1=1,c2=1):
             p2=listp[i+1]
         else:
             p2=listp[0]
-        plt.plot([p1[0],p2[0]],[p1[1],p2[1]])
-    plt.axis('equal')
-    plt.show()
+     #   plt.plot([p1[0],p2[0]],[p1[1],p2[1]])
+    #plt.axis('equal')
+    #plt.show()
     return listp
     
 def mesh_polygon(n,c1=1,c2=1,dec=False):
     
-    polyg_p=regular_polygon(n,c1,c2)
+    polyg_p=regular_polygon(n)
     center=[c1,c2]
     listp=[]
     for i in range (n):
@@ -281,8 +282,8 @@ def mesh_polygon(n,c1=1,c2=1,dec=False):
     plt.show()
     return listp
 
-print(mesh_polygon(10))
-
+mesh_polygon(5,1/2,1)
+mesh_polygon(5)
 class GeneratePolygon(object):
 
     """
