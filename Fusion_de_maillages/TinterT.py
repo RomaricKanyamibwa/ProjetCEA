@@ -154,8 +154,8 @@ def TinterT(msh1,msh2,dx):
 			fin = False
 
 
-# Si le triangle 1 du mesh1 s'intersecte (methode intersect() ?? pas moyen de tester) avec les triangles 1,2,3,4 du mesh2 Alors 
-# on check si les triangles voisins (methode neighbors()) des triangles 1,2,3,4 du mesh2 s'intersectent aussi avec le triangle 1 du mesh1
+# Si le triangle 1 du mesh1 s'intersecte avec les triangles 1,2,3,4 du mesh2 Alors 
+# on check si les triangles voisins des triangles 1,2,3,4 du mesh2 s'intersectent aussi avec le triangle 1 du mesh1
 
 a1 = neighbours(elem1,d1)
 a2 = neighbours(elem2,d2)
