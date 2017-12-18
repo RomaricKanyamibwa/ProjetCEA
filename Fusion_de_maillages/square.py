@@ -242,9 +242,9 @@ def square3(k,fig=3):
     plt.show()
 
 
-#square(3)
-#square2(3)
-#square3(4)
+square(4)
+square2(4)
+square3(4)
 
 
 def regular_polygon(n,r=1,c1=1,c2=1):
@@ -283,7 +283,7 @@ def mesh_polygon(n,c1=1,c2=1,dec=False):
     return listp
 
 mesh_polygon(5,1/2,1)
-mesh_polygon(5)
+mesh_polygon(10)
 class GeneratePolygon(object):
 
     """
