@@ -70,10 +70,39 @@ Y1=[1.0, 0.875, 0.9375, 1.0]
 X2=[1.0, 0.9375, 0.9375, 1.0]
 Y2=[0.875, 0.8125, 0.9375, 0.875]
 
-
-def surface_triangle(S1,S2,S3):
-    
-    a=[-S1[0]+S2[0],-S1[1]+S2[1]]
-    b=[S3[0]-S2[0],S3[1]-S2[1]]
-    surface=det([a,b])    
+ez=[0,0,1] #vecteur unité 
+def surface_triangle(p1,p2,p3,TwoDim=True):
+    """pour l'instant on calcule l'aire en 2D"""
+    S1=p1
+    S3=p3
+    S2=p2
+    if(len(p1)<3):
+        S1=S1+[0]
+    if(len(p2)<3):
+        S2=S2+[0]
+    if(len(p3)<3):
+        S3=S3+[0]    
+    a=[-S1[0]+S2[0],-S1[1]+S2[1],-S1[2]+S2[2]]
+    b=[S3[0]-S2[0],S3[1]-S2[1],S3[2]-S2[2]]
+    print(cross(a,b))
+    print("Dot:",dot(cross(a,b),ez))
+    if(dot(cross(a,b),ez)>0):
+        if(TwoDim):
+            a.pop()
+            b.pop()  
+        surface=det([a,b])
+    else:
+        if(TwoDim):
+            a.pop()
+            b.pop()  
+        surface=det([b,a])
+    print("surface:",surface)
     return surface/2
+
+
+surface_triangle([-2,-1],[-1,-2],[11,-1])
+
+
+
+
+
