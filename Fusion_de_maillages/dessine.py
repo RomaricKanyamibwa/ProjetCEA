@@ -9,10 +9,10 @@ import numpy as np
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-deux_d = False
+deux_d = True
 
 # Ouverture d'un fichier en *lecture*:
-fichier = open("disque.msh")
+fichier = open("m2.msh")
  
 # ...
 # Utilisation du fichier
@@ -73,42 +73,7 @@ for line in fichier:
 plt.show()
 
 fichier.close()
-"""
-for i in range(14):
-    fichier.readline()
-elems = np.fromfile(fichier,count=(n_elems-14)*8,sep=" ").reshape((n_elems-14,8)) # $EndElements read as -1
-# This array must be reshaped based on the element type(s)
-# array([  1.,   4.,   2.,   1.,  11.,   1.,   2.,   3.,   5.,   2.,   4.,
-#    2.,   1.,  11.,   2.,   5.,   6.,   8.])
-# ...
-print n_elems, n_nodes  
 
-#for i in range(n_elems):
-    #print elems[i]
-
-# Fermeture du fichier
-fichier.close()
-
-for i in range(n_elems-14):
-    nb_arg = elems[i][2] +1
-    p1 = elems[i][2+nb_arg] -1
-    p2 = elems[i][2+nb_arg+1] -1
-    p3 = elems[i][2+nb_arg+2] -1
-    print p1,p2,p3
-    print nodes[p1][1],nodes[p2][1],nodes[p3][1],nodes[p1][1]
-    print nodes[p1][2],nodes[p2][2],nodes[p3][2],nodes[p1][2]
-    x = [nodes[p1][1],nodes[p2][1],nodes[p3][1],nodes[p1][1]]
-    y = [nodes[p1][1],nodes[p2][2],nodes[p3][2],nodes[p1][2]]
-    plt.plot(x, y)
-    plt.axis('equal')   # ajout
-    plt.show()
-    plt.close()
-    
-    
-print "eeeeeeeeee"
-plt.plot([0.500000000001, 0.0, 0.25, 0.500000000001],[1.0, 1.0, 0.75, 1.0])
-
-"""
 
 
 
