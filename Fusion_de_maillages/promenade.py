@@ -96,12 +96,21 @@ def surface_triangle(p1,p2,p3,TwoDim=True):
             a.pop()
             b.pop()  
         surface=det([b,a])
-    print("surface:",surface)
+    print("surface:",det([a,b]))
+    print("surface2:",det([b,a]))
+    print("RES:",surface)
     return surface/2
 
 
-surface_triangle([-2,-1],[-1,-2],[11,-1])
-
+surface_triangle([0,0],[1,0],[0,-1])   
+surface_triangle([0,0],[0,1],[0,-1])  
+surface_triangle([0,1],[1,0],[0,-1])
+print("")  
+print("triang non adj")
+print("")
+surface_triangle([0,0],[1,0],[2,0])   
+surface_triangle([0,0],[0,1],[2,0])  
+surface_triangle([0,1],[1,0],[2,0 ])  
 
 
 
