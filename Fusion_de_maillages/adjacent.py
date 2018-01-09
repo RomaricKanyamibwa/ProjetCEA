@@ -58,7 +58,7 @@ def mshToPython_triangle(nom_fichier):
 
     for line in f1:
         print(line)
-		ligne = line.split(' ')
+        ligne = line.split(' ')
         if(ligne[0]!='$EndElements\r\n'):
             ligne = map(int, ligne)
             if(ligne[1]==2):
@@ -110,8 +110,8 @@ def pythonToMsh(nodes, elem):
 """    
     
     
-(nodes1, elem1, n_nodes_1, n_elems_1) = mshToPython_triangle("maillage1.msh")
-(nodes2, elem2, n_nodes_2, n_elems_2) = mshToPython_triangle("maillage2.msh")
+(nodes1, elem1, n_nodes_1, n_elems_1) = mshToPython_triangle("Fichier_MSH/maillage1.msh")
+(nodes2, elem2, n_nodes_2, n_elems_2) = mshToPython_triangle("Fichier_MSH/maillage2.msh")
 
 
 nodes3 = []
@@ -200,11 +200,11 @@ n1 = input("De quel triangle souhaitez-vous connaître ses voisins ? Je veux con
 
 def neighbours(elem,dx):
 #	if n1 in d1.values :
-	a = numpy.zeros(shape=(len(elem)+1,len(elem)+1)
-	for i in a:
-		a[i,1] = i
-	for i in dx.values	
-		if j != i
+	a = numpy.zeros(shape=(len(elem)+1,len(elem)+1))
+	for j in a:
+		a[j,1] = j
+	for i in dx.values:	
+		if j != i:
 			a[i,j]=j 
 	return(a)
 
@@ -215,11 +215,11 @@ a3 = neighbours(elem3,d)
 #	for v in di if di :
 #		neighboursOfneighbour(v,d)
 
-def neighboursOfneighbour(a1,a2)
+def neighboursOfneighbour(a1,a2):
 	b = numpy.zeros(shape=(len(a1)+len(a2),len(a1)+len(a2)))
 	if i in a1[i,0]:
-		for t in a1[i,:]
-			if intersection(i,t) == True
+		for t in a1[i,:]:
+			if intersection(i,t) == True:
 				b[i] = append(t)
 				
 
