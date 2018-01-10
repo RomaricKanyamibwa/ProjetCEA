@@ -1,4 +1,5 @@
 import numpy as np
+from neighbors import neighbours
 
 def mshToPython_triangle(nom_fichier):
     f1 = open(nom_fichier)
@@ -33,12 +34,12 @@ def mshToPython_triangle(nom_fichier):
     return (nodes, elems, n_nodes, n_elems)    
    
 
-(nodes1, elems1, n_nodes_1, n_elems_1) = mshToPython_triangle("maillage1.msh")
-(nodes2, elems2, n_nodes_2, n_elems_2) = mshToPython_triangle("maillage2.msh")
+(nodes1, elems1, n_nodes_1, n_elems_1) = mshToPython_triangle("Fichier_MSH/maillage1.msh")
+(nodes2, elems2, n_nodes_2, n_elems_2) = mshToPython_triangle("Fichier_MSH/maillage2.msh")
 
 voisin1 = [[2,3],[1,7],[1,4,5],[3],[6,3],[7,5],[2,8,6],[7]]
 voisin2 = [[2],[1,3,5],[2,4],[3,7],[6,2],[5,7],[6,8,4],[7]]
-
+neighbours(voisin1)
 
 ##POUR GERER L INTERSECTION
 def intersect(L1,L2,p11,p12,p21,p22,s1,s2):
@@ -162,7 +163,7 @@ def TinterT(msh1,msh2, voisin_m1, voisin_m2):
 
         while nontrouve:
             print("non trouve")
-            print t1,t2
+            print (t1,t2)
             n = len(aParcourir)
             for i in range(n_1,n):
                 nj = len(voisin_m2[aParcourir[i]-1])
@@ -174,7 +175,7 @@ def TinterT(msh1,msh2, voisin_m1, voisin_m2):
                             intersect[t1].append(t2)
                             nontrouve = False                    
                 n_1 = n
-            print aParcourir
+            print (aParcourir)
                
         ######################################
         aParcourir = []
@@ -200,7 +201,7 @@ def TinterT(msh1,msh2, voisin_m1, voisin_m2):
                 if(aParcourir[i]-1 not in intersect[t1]):
                     t2 = aParcourir[i]-1
                     intersect[t1].append(t2)  
-        print aParcourir
+        print (aParcourir)
         print(intersect)
     return intersect
 
@@ -225,7 +226,7 @@ def superposition(node1,node2,elems1,elems2, voisin1, voisin2, intersecte):
                         pt_intersection=R
             nodes3.append([0, pt_intersection[0],pt_intersection[1],0])
             n_nodes_3 = n_nodes_3 + 1
-    print"r"
+    print("r")
     print(pt_intersection)
             
             #########attention point particulier pour 1 et 2

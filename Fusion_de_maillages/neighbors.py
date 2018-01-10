@@ -61,7 +61,7 @@ def neighbours(elem):
     
     """
 #	cette fonction est pour le maillage conforme
-    n,dx=list_neighbors(elems1)
+    n,dx=list_neighbors(elem)
     a = [[]]*(n+1)
 #    print("len",len(elem))
 #    for i in range(1,len(elem)) :
