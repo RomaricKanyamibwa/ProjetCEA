@@ -4,7 +4,6 @@ from __future__ import division
 Created on Mon Dec 18 23:37:17 2017
 @author: HAKAM Sophia, VOISEMBERT Colette, KANYAMIBWA Romaric,NDAYE Ramatoulaye
 
-Generate Meshed Polygons
 ================
 
 
@@ -23,6 +22,7 @@ Generate Meshed Polygons
 from numpy import cross,arccos,dot,clip,arctan2
 from numpy.linalg import det,norm
 from math import pi
+from test import neighbours
 
 
 
@@ -83,35 +83,48 @@ def surface_triangle(p1,p2,p3,TwoDim=True):
     if(len(p3)<3):
         S3=S3+[0]    
     a=[-S1[0]+S2[0],-S1[1]+S2[1],-S1[2]+S2[2]]
-    b=[S3[0]-S2[0],S3[1]-S2[1],S3[2]-S2[2]]
+    b=[S3[0]-S1[0],S3[1]-S1[1],S3[2]-S1[2]]
+    #print("a:",a)
+    #print("b",b)
     print(cross(a,b))
-    print("Dot:",dot(cross(a,b),ez))
-    if(dot(cross(a,b),ez)>0):
-        if(TwoDim):
-            a.pop()
-            b.pop()  
-        surface=det([a,b])
-    else:
-        if(TwoDim):
-            a.pop()
-            b.pop()  
-        surface=det([b,a])
-    print("surface:",det([a,b]))
-    print("surface2:",det([b,a]))
-    print("RES:",surface)
-    return surface/2
+    res=dot(cross(a,b),ez)
+    print("Dot:",res)
+    #if(dot(cross(a,b),ez)>0):
+    #if(TwoDim):
+     #   a.pop()
+      #  b.pop()  
+    #surface=det([a,b])
+    #print("surface:",det([a,b]))
+    #print("surface2:",det([b,a]))
+    #print("RES:",surface)
+    return res
 
 
-surface_triangle([0,0],[1,0],[0,-1])   
-surface_triangle([0,0],[0,1],[0,-1])  
-surface_triangle([0,1],[1,0],[0,-1])
-print("")  
-print("triang non adj")
-print("")
-surface_triangle([0,0],[1,0],[2,0])   
-surface_triangle([0,0],[0,1],[2,0])  
-surface_triangle([0,1],[1,0],[2,0 ])  
+#♥surface_triangle([0,0],[1,0],[0,-1])   
+#surface_triangle([0,0],[0,1],[0,-1])  
+#surface_triangle([1,0],[0,1],[0,-1])
+#print("")  
+#print("triang non adj")
+#print("")
+#surface_triangle([0,0],[1,0],[2,0])   
+#surface_triangle([0,0],[0,1],[2,0])  
+#surface_triangle([0,1],[1,0],[2,0 ])  
 
 
+def test_include_triang(p1,p2,p3,a,TwoDim=True):
+    S1=surface_triangle(p1,p2,a)
+    S2=surface_triangle(p1,p3,a)
+    S3=surface_triangle(p2,p3,a)
+    if(S1<0 or S2<0 or S3<0):
+        return False
+    return True
 
+test_include_triang([0,0],[1,0],[0,1],[0,-1])
 
+def promenade(List_triang,List_point,point):
+    t=List_triang[0]
+    if(test_include_triang(List_point[t-1][0],List_point[t-1][1],List_point[t-1][2],point)):
+        return t
+    else: 
+        neigh=neighbours(List_triang)
+        return promenade(neigh,List_point,point)

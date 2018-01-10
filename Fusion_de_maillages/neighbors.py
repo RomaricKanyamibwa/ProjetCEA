@@ -3,7 +3,7 @@
 #from random import randrange
 
 #import numpy as np
-from tinter import mshToPython_triangle
+#from tinter import mshToPython_triangle
 
 elem3 = [[1,2,7,3],
 	[2,4,5,6],
@@ -13,8 +13,8 @@ elem3 = [[1,2,7,3],
     [6,7,4,2]]
     
 
-(nodes1, elems1, n_nodes_1, n_elems_1) = mshToPython_triangle("maillage1.msh")
-(nodes2, elems2, n_nodes_2, n_elems_2) = mshToPython_triangle("maillage2.msh")
+#(nodes1, elems1, n_nodes_1, n_elems_1) = mshToPython_triangle("maillage1.msh")
+#(nodes2, elems2, n_nodes_2, n_elems_2) = mshToPython_triangle("maillage2.msh")
 elems1=[[1, 1, 5, 9], [2, 1, 8, 9], [3, 5, 6, 9], [4, 2, 5, 6], [5, 3, 6, 9], [6, 3, 7, 9], [7, 7, 8, 9], [8, 4, 7, 8]]
 
 def list_neighbors(triangles):
@@ -49,7 +49,7 @@ n,d=list_neighbors(elems1)
 print(d)
 #n1 = input("De quel triangle souhaitez-vous connaître ses voisins ? Je veux connaître ceux du triangle numéro :")
 
-def neighbours(elem,dx):
+def neighbours(elem):
     """Fonction qui retourne la liste des voisins de triangles
     Arguments:
     -elem: liste des triangles
@@ -59,6 +59,7 @@ def neighbours(elem,dx):
     
     """
 #	cette fonction est pour le maillage conforme
+    n,dx=list_neighbors(elems1)
     a = [[]]*(len(elem)+1)
 #    print("len",len(elem))
 #    for i in range(1,len(elem)) :
@@ -66,7 +67,7 @@ def neighbours(elem,dx):
     for x in dx.values():
         #print(x)
         if(len(x)==2):
-            print((x[0]))
+            #print((x[0]))
             a[x[0]]=a[x[0]]+[x[1]]
 #            print(x[1])
             a[x[1]]=a[x[1]]+[x[0]]
@@ -82,4 +83,4 @@ def neighbours(elem,dx):
     print(a)
     return(a)
 
-a3 = neighbours(elems1,d)
+a3 = neighbours(elems1)
