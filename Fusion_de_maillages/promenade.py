@@ -22,7 +22,8 @@ Created on Mon Dec 18 23:37:17 2017
 from numpy import cross,arccos,dot,clip,arctan2
 from numpy.linalg import det,norm
 from math import pi
-from test import neighbours
+from neighbors import list_neighbors
+from neighbors import neighbours
 
 
 
@@ -116,15 +117,63 @@ def test_include_triang(p1,p2,p3,a,TwoDim=True):
     S2=surface_triangle(p1,p3,a)
     S3=surface_triangle(p2,p3,a)
     if(S1<0 or S2<0 or S3<0):
-        return False
+        print("YES")
+        if(S1<0):
+            return 2,3
+        if(S2<0):
+            return 2,4
+        else:
+            return 3,4
+    print("NO")
     return True
 
-test_include_triang([0,0],[1,0],[0,1],[0,-1])
+test_include_triang([0,0],[1,0],[0,1],[0,1])
+test_include_triang([0,0],[1,0],[0,1],[0,0.5])
 
-def promenade(List_triang,List_point,point):
-    t=List_triang[0]
-    if(test_include_triang(List_point[t-1][0],List_point[t-1][1],List_point[t-1][2],point)):
+it=0
+
+def find_index(List,num):
+    ind=0
+    for i in List:
+        if(num==i[0]):
+            return ind
+        ind=ind+1
+    return False
+
+def promenade(List_triang,List_point,point,num_triang):
+    print("N°iteration:"+it)
+    ind_triang= find_index(List_triang,num_triang)
+    if(num_triang>len(List_triang)):
+        raise ValueError("Valeur de triangle non definit")
+    t=List_triang[ind_triang]
+    p1=find_index(List_point,List_triang[t][1])
+    p2=find_index(List_point,List_triang[t][2])
+    p3=find_index(List_point,List_triang[t][3])
+    k=test_include_triang(List_point[p1],List_point[p2],List_point[p3],point)
+    if(k==True):
         return t
-    else: 
-        neigh=neighbours(List_triang)
-        return promenade(neigh,List_point,point)
+    else:
+        
+        max,neigh=list_neighbors(List_triang)
+        if(neigh[(List_triang[t][k[0]],List_triang[t][k[1]])]==t):
+            new_num_triang=neigh[1]
+        else:
+            new_num_triang=neigh[0]
+        return promenade(List_triang,point,new_num_triang)
+    
+    
+    
+
+List_triang=[[1,1,2,3],[2,2,3,4],[3,1,3,5],[4,1,2,6]]
+List_point=[[1,0,0],[2,1,1],[3,0,1],[4,1,2],[5,1,-1],[6,-1,1]]
+neighbours(List_triang)
+#promenade(List_triang,List_point,[-1,1])
+# def promenade(List_triang,List_point,point,num_triang=0):
+#     t=List_triang[num_triang]
+#     if(test_include_triang(List_point[t-1][0],List_point[t-1][1],List_point[t-1][2],point)):
+#         return t
+#     else: 
+#         neigh=neighbours(List_triang)
+#         return promenade(neigh,List_point,point)
+
+
