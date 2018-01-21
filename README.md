@@ -12,6 +12,8 @@ de manière automatique de tels chemins fermés, et à les visualiser plus parti
 Comment lancer le code pour tester la méthode de surmaillage. 
 Aller dans le dossier /ProjetCEA/Fusion_de_maillages/. Définissez les maillages M1 et M2 dont vous voulez calculer le surmaillage dans le fichier ProjetCEA/Fusion_de_maillages/chargement_des_donnees.py. Pour cela vous pouvez choisir comme entrée des fichiers de maillage .msh que vous aurez placé dans le dossier ProjetCEA/Fusion_de_maillages/Fichier_MSH/ au préalable. Ou définir les tableaux des noeuds (nodes, chaque ligne donne le numéro du noeud suivit de ses coordonnées en 3D) et celui des triangles (elems, chaque ligne donne le numéro du triangle suivit des trois numéros de noeuds de ses sommets) pour chaque maillage source. Pour pouvez tester les différents exemples déjà présents dans le fichier ProjetCEA/Fusion_de_maillages/chargement_des_donnees.py, en décommentant les exemples. Ensuite il vous suffit de lancer  ProjetCEA/Fusion_de_maillages/main.py et vous verrez s'afficher le maillage 3 (surmaillage des triangles sources) puis la superposition des deux maillages M1 et M2.
 
+Il faut avoir installer les packages matplotlib et numpy et exécuter le code sous Python 2.7.
+
 
 
 
