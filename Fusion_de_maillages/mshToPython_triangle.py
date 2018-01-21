@@ -36,4 +36,7 @@ def mshToPython_triangle(nom_fichier):
         
     f1.close()
     n_elems = len(elems)
+    
+    for i in range(n_elems):
+        elems[i][0] = i+1
     return (nodes, elems, n_nodes, n_elems)    
