@@ -42,13 +42,13 @@ bnd[] -= {36, 44, 52, 60};
 Physical Surface(75) = bnd[];
 // Find bases for relative homology spaces of the domain modulo the four
 // terminals.
-Homology {{1}, {70, 71, 72, 73,15,31}};
+Homology {1};
 // Find homology space bases isomorphic to the previous bases: homology spaces
 // modulo the non-terminal domain surface, a.k.a the thin cuts.
-Homology {{1}, {75}};
+//Homology {{1}, {75}};
 // Find cohomology space bases isomorphic to the previous bases: cohomology
 // spaces of the domain modulo the four terminals, a.k.a the thick cuts.
-Cohomology {{1}, {70, 71, 72, 73}};
+//Cohomology {{1}, {70, 71, 72, 73}};
 // More examples:
 //  Homology {1};
 //  Homology;
