@@ -11,7 +11,7 @@ matrix = Matrix([
 ])
 
 # Vector of free members
-b = [8, -3, 1, 1, 3]
+b = [0, 0, 0, 0, 0]
 
 
 def ppr(matr, left, right):
@@ -133,7 +133,7 @@ def transform_smith(matr: Matrix, left: Matrix, right: Matrix, s: int):
     # ppr(matr, left, right)
 
     null_edging(matr, left, right, s)
-    ppr(matr, left, right)
+    #ppr(matr, left, right)
 
 
 # Checks whether south-western block of matrix, starting at pos [s, s], is zero
@@ -174,13 +174,16 @@ def smith_solve(matr: Matrix, bm: list):
     if rows != len(b):
         raise RuntimeError()
 
-    sf, l, r, rk = smith_form(matrix)
+    sf, l, r, rk = smith_form(matr)
 
     if rk == 0 and not b.is_zero:
         return []
     elif rk == 0 and b.is_zero:
         return Matrix.zeros(cols)
     else:
+        #print("line 184")
+        #pprint(b)
+        #pprint(l)
         c = l * b
         y = Matrix(symbols("y:" + str(cols)))
 
@@ -197,7 +200,7 @@ def smith_solve(matr: Matrix, bm: list):
             return x
 
 
-#cols = len(matrix.row(0))
+cols = len(matrix.row(0))
 # pprint(smith_form(matrix))
 
 #pprint(smith_solve(matrix, b))
