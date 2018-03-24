@@ -167,7 +167,7 @@ def smith_form(matr: Matrix):
 
 
 # Solves linear system of equations with use of Smith normal form
-def smith_solve(matr: Matrix, bm: list):
+def smith_solve(matr: Matrix, bm: list , get_snf=False):
     rows, cols = len(matr.col(0)), len(matr.row(0))
     b = Matrix(bm)
 
@@ -197,18 +197,51 @@ def smith_solve(matr: Matrix, bm: list):
                     y[i] = c[i] / sf[i, i]
 
             x = r * y
-            return x
+            if get_snf==False :
+                return x
+            elif get_snf==True :
+                return x,sf, l, r, rk
 
 
-cols = len(matrix.row(0))
+#cols = len(matrix.row(0))
 # pprint(smith_form(matrix))
-
-#pprint(smith_solve(matrix, b))
-
+#sol=smith_solve(matrix, b)
+#pprint(sol)
+#symbol=sol.free_symbols
+#pprint(symbol)
 #m = matrix, Matrix(b)
 #pprint(linsolve(m, symbols("y:" + str(cols))))
-
-
+""""
+Betti_number_SNF=2
+d={}
+vect=[0]*cols
+KerM_SNF=[0]*Betti_number_SNF
+list_d=[{}]*Betti_number_SNF
+for k in range(Betti_number_SNF):
+    counter=0
+    for x in symbol:
+        print("subs")
+        if counter==k :
+            d[str(x)]=1
+        else:
+            d[str(x)]=0
+        counter=counter+1
+        print(type(x),"=>",x)
+    list_d[k]=d.copy()
+pprint(list_d)
+#sol.subs(d)
+i=0
+for k in range(Betti_number_SNF):
+    vect=[0]*cols
+    i=0
+    for elem in sol:
+        vect[i]=elem.subs(list_d[k])
+        print(i,":",elem.subs(list_d[k]))
+        i=i+1
+    KerM_SNF[k]=Matrix(vect).copy()
+pprint(KerM_SNF)
+pprint(matrix.nullspace())
+"""
 
 #An,L,R,r=smith_form((Matrix(A)))
 #print("A")
