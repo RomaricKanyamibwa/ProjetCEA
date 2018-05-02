@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+Éditeur de Spyder
+
+Ce script temporaire est sauvegardé ici :
+/home/sasl/eleves/main/3302938/.spyder2/.temp.py
+"""
+
 import numpy as np
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -22,67 +30,88 @@ elem1 = []
 
 def nb_holes(n):
     for i in range(0,n):
-        node.append([0+i*3,0,0])
-        node.append([3+i*3,0,0])
-        node.append([3+i*3,0,3])
-        node.append([0+i*3,0,3])
-        node.append([1+i*3,0,1])
-        node.append([2+i*3,0,1])
-        node.append([2+i*3,0,2])
-        node.append([1+i*3,0,2])
-        node.append([1+i*3,0,1])
-        node.append([2+i*3,0,1])
-        node.append([1+i*3,0,3])
-        node.append([2+i*3,0,3])
-        node.append([0+i*3,3,0])
-        node.append([3+i*3,3,0])
-        node.append([3+i*3,3,3])
-        node.append([0+i*3,3,3])
-        node.append([1+i*3,3,1])
-        node.append([2+i*3,3,1])
-        node.append([2+i*3,3,2])
-        node.append([1+i*3,3,2])
-        node.append([1+i*3,3,1])
-        node.append([2+i*3,3,1])
-        node.append([1+i*3,3,3])
-        node.append([2+i*3,3,3])
+        node.append([0,0+i*3,0])
+        node.append([0,3+i*3,0])
+        node.append([3,3+i*3,0])
+        node.append([3,0+i*3,0])
+        
+        node.append([1,1+i*3,0])
+        node.append([1,2+i*3,0])
+        node.append([2,2+i*3,0])
+        node.append([2,1+i*3,0])
+        
+        node.append([0,1+i*3,0])
+        node.append([0,2+i*3,0])
+        node.append([3,1+i*3,0])
+        node.append([3,2+i*3,0])
+        
 
-        elem1.append([0+i*24,8,10])
-        elem1.append([0+i*24,30,10])
-        elem1.append([4+i*24,8,5])
-        elem1.append([7+i*24,10,11])
-        elem1.append([8+i*24,9,5])
-        elem1.append([7+i*24,6,11])
-        elem1.append([9+i*24,1,2])
-        elem1.append([9+i*24,2,11])
-        elem1.append([12+i*24,20,22])
-        elem1.append([12+i*24,22,15])
-        elem1.append([20+i*24,17,16])
-        elem1.append([18+i*24,23,22])
-        elem1.append([20+i*24,21,17])
-        elem1.append([18+i*24,19,23])
-        elem1.append([21+i*24,13,14])
-        elem1.append([21+i*24,14,23])
-        elem1.append([12+i*24,13,1])
-        elem1.append([12+i*24,1,0])
-        elem1.append([15+i*24,14,2])
-        elem1.append([15+i*24,2,13])
-        elem1.append([12+i*24,15,3])
-        elem1.append([12+i*24,3,0])
-        elem1.append([16+i*24,17,4])
-        elem1.append([17+i*24,4,5])
-        elem1.append([17+i*24,19,5])
-        elem1.append([19+i*24,6,5])
-        elem1.append([18+i*24,19,7])
-        elem1.append([19+i*24,6,7])
-        elem1.append([16+i*24,18,4])
-        elem1.append([18+i*24,7,4])
+        node.append([0,0+i*3,3])
+        node.append([0,3+i*3,3])
+        node.append([3,3+i*3,3])
+        node.append([3,0+i*3,3])
+        
+        node.append([1,1+i*3,3])
+        node.append([1,2+i*3,3])
+        node.append([2,1+i*3,3])
+        node.append([2,2+i*3,3])
+        
+        node.append([0,1+i*3,3])
+        node.append([0,2+i*3,3])
+        node.append([3,1+i*3,3])
+        node.append([3,2+i*3,3])
+        
+        elem1.append([0+i*24,8+i*24,10+i*24])
+        elem1.append([0+i*24,3+i*24,10+i*24])
+        elem1.append([8+i*24,5+i*24,4+i*24])
+        elem1.append([7+i*24,10+i*24,11+i*24])
+        elem1.append([8+i*24,9+i*24,5+i*24])
+        elem1.append([7+i*24,6+i*24,11+i*24])
+        elem1.append([9+i*24,1+i*24,2+i*24])
+        elem1.append([9+i*24,2+i*24,11+i*24])
+        
+        
+        elem1.append([12+i*24,20+i*24,22+i*24])
+        elem1.append([12+i*24,22+i*24,15+i*24])
+        elem1.append([20+i*24,17+i*24,16+i*24])
+        elem1.append([18+i*24,23+i*24,22+i*24])
+        elem1.append([20+i*24,21+i*24,17+i*24])
+        elem1.append([18+i*24,19+i*24,23+i*24])
+        elem1.append([21+i*24,13+i*24,14+i*24])
+        elem1.append([21+i*24,14+i*24,23+i*24])
+        
+        elem1.append([12+i*24,13+i*24,1+i*24])
+        elem1.append([12+i*24,1+i*24,0+i*24])
+        
+        #elem1.append([13+i*24,14+i*24,2+i*24])
+        #elem1.append([13+i*24,2+i*24,1+i*24])
+        
+        elem1.append([15+i*24,14+i*24,2+i*24])
+        elem1.append([15+i*24,2+i*24,3+i*24])
+        
+        #elem1.append([12+i*24,15+i*24,3+i*24])
+        #elem1.append([12+i*24,3+i*24,0+i*24])
+        
+        elem1.append([16+i*24,17+i*24,4+i*24])
+        elem1.append([17+i*24,4+i*24,5+i*24])
+        
+        elem1.append([17+i*24,19+i*24,5+i*24])
+        elem1.append([19+i*24,6+i*24,5+i*24])
+        
+        elem1.append([18+i*24,19+i*24,7+i*24])
+        elem1.append([19+i*24,6+i*24,7+i*24])
+        
+        elem1.append([16+i*24,18+i*24,4+i*24])
+        elem1.append([18+i*24,7+i*24,4+i*24])
+        
 
-
-        if(i == n):
-            elem1.append([13+i*24,14,2])
-            elem1.append([13+i*24,2,1])
-
+        if(i == 0):
+            elem1.append([12+i*24,15+i*24,3+i*24])
+            elem1.append([12+i*24,3+i*24,0+i*24])
+        if(i == n-1):
+            elem1.append([13+i*24,14+i*24,2+i*24])
+            elem1.append([13+i*24,2+i*24,1+i*24])
+        
 
 
 def draw_cycle(vect, node, elem, arrete):
@@ -108,6 +137,6 @@ def draw_cycle(vect, node, elem, arrete):
             ax.plot(x, y, z, 'r')
             ax.axis('equal') 
 
-draw_cycle([], node, elem1, [])
 nb_holes(2)
+draw_cycle([], node, elem1, [])
 plt.show()
