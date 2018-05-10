@@ -24,6 +24,10 @@ from numpy.linalg import matrix_rank
 from scipy import linalg
 from sympy import *
 from smith_normal_form import smith_form,smith_solve
+import sys
+import time
+from sympy.matrices import SparseMatrix
+
 
         # 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16
 A = [   [ 1,-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,-1],
@@ -169,6 +173,36 @@ def get_kerM_ImM_snf(A:Matrix,B:Matrix):
     #pprint(KerM_SNF)
     return M,r,ImM_SNF,KerM_SNF,Betti_number_SNF
 
+
+def Select_Kernel_Method(A:SparseMatrix,B:SparseMatrix,method=2,display=false):
+    print(A.shape)
+    print(B.shape)
+    if(method==1):
+        start_time = time.time()
+        M,r,ImM_SNF,KerM_SNF,Betti_number_SNF=get_kerM_ImM_snf(Matrix(A),Matrix(B))
+        print("With smithsolve --- %s seconds ---" % (time.time() - start_time))
+    if(method==2):#this method in general is faster
+        M=A.T*A+B*B.T
+        start_time = time.time()
+        An,L,R,r = smith_form(M)
+        #W=R
+        Betti_number_SNF=(R.shape[0]-r)
+        KerM_SNF=[0]*Betti_number_SNF
+        for i in range(Betti_number_SNF):
+            KerM_SNF[i]=R.col(r+i)
+        print("With SNF --- %s seconds ---" % (time.time() - start_time))
+        #if(display):
+    #print("KerM_SNF:")
+    #pprint(KerM_SNF)
+    #print("KerM with Nullspace")
+    #start_time = time.time()
+    #(M.nullspace())
+    #print("With nullspace --- %s seconds ---" % (time.time() - start_time))
+    #for x in KerM_SNF:
+    #        pprint(M*x)
+    return Betti_number_SNF,KerM_SNF
+
+
     #print("ps:")
 #for j in range(R.inv().T.shape[0]-r):
     #if(i==0):
@@ -188,6 +222,7 @@ def get_kerM_ImM_snf(A:Matrix,B:Matrix):
 #        ps = R.inv().col(r).dot(R.inv().col(r+i))
 #        print("PS")
 #        print(ps)
+
 """
 M,r,ImM_SNF,KerM_SNF,Betti_number_SNF=get_kerM_ImM_snf(Matrix(A),Matrix(B))
 print("ImM_SNF")
@@ -260,3 +295,14 @@ KerM_ent=Matrix([-5, 0, -21, 16, 5, 16, -5, 0, 5, 6, -3, 4, -1, 4, 6,-1])
 
 #for x in KerM_SNF:
 #    pprint(M*x)
+
+disp=False
+if __name__ == "__main__":
+    if (len(sys.argv) != 2):
+        print("Usage example:python3 homology_calc.py [1|2] ")
+    else:
+        #if (len(sys.argv) >= 3):
+        #disp=True
+        print("Argv:",sys.argv[1])
+        Select_Kernel_Method(SparseMatrix(A),SparseMatrix(B),int(sys.argv[1]),True)
+
