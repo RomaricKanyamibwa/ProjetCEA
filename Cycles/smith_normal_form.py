@@ -1,5 +1,4 @@
 from sympy import *
-from sympy.matrices import SparseMatrix
 
 # Input from assignment:
 # Matrix of coefficients
@@ -13,18 +12,15 @@ matrix = Matrix([
 
 # Vector of free members
 b = [0, 0, 0, 0, 0]
-k=0
+
 
 def ppr(matr, left, right):
     #pprint([left, matr, right])
-    #i=k+1
-    print(":-----------------------------------------------")
-    #k=i
-    return
-
+    #print("-----------------------------------------------")
+    return 0;
 
 # Moves least element in south-western block, that starts at position [s, s] into start position
-def move_least_to_start(matr: SparseMatrix, left: SparseMatrix, right: SparseMatrix, s: int):
+def move_least_to_start(matr: Matrix, left: Matrix, right: Matrix, s: int):
     rows, cols = len(matr.col(0)), len(matr.row(0))
 
     pos = [s, s]
@@ -49,7 +45,7 @@ def move_least_to_start(matr: SparseMatrix, left: SparseMatrix, right: SparseMat
 
 
 # Modifies edging by standard operations in order to make it zero, should be followed by null_edging()
-def modify_edging(matr: SparseMatrix, left: SparseMatrix, right: SparseMatrix, s: int):
+def modify_edging(matr: Matrix, left: Matrix, right: Matrix, s: int):
     rows, cols = len(matr.col(0)), len(matr.row(0))
 
     for i in range(s + 1, rows):
@@ -66,7 +62,7 @@ def modify_edging(matr: SparseMatrix, left: SparseMatrix, right: SparseMatrix, s
 
 
 # Moves least element in edging, that starts at position [s, s] into start position
-def move_le_to_start(matr: SparseMatrix, left: SparseMatrix, right: SparseMatrix, s: int):
+def move_le_to_start(matr: Matrix, left: Matrix, right: Matrix, s: int):
     rows, cols = len(matr.col(0)), len(matr.row(0))
     pos = [s, s]
     num = abs(matr[s, s])
@@ -89,7 +85,7 @@ def move_le_to_start(matr: SparseMatrix, left: SparseMatrix, right: SparseMatrix
 
 
 # Makes edging, that starts at pos [s, s] zero, ensures south-western block does not divide element at pos [s, s]
-def null_edging(matr: SparseMatrix, left: SparseMatrix, right: SparseMatrix, s: int):
+def null_edging(matr: Matrix, left: Matrix, right: Matrix, s: int):
     rows, cols = len(matr.col(0)), len(matr.row(0))
 
     while not (matr[s + 1: rows, s].is_zero and matr[s, s + 1: cols].is_zero):
@@ -104,7 +100,7 @@ def null_edging(matr: SparseMatrix, left: SparseMatrix, right: SparseMatrix, s: 
 
 
 # Ensures south-western block does not divide element at pos [s, s]
-def ensure_nb_divides(matr: SparseMatrix, left: SparseMatrix, right: SparseMatrix, s: int):
+def ensure_nb_divides(matr: Matrix, left: Matrix, right: Matrix, s: int):
     rows, cols = len(matr.col(0)), len(matr.row(0))
     pos = [s, s]
     num = matr[s, s]
@@ -129,7 +125,7 @@ def ensure_nb_divides(matr: SparseMatrix, left: SparseMatrix, right: SparseMatri
 
 
 # Iteration of transformation into Smith normal form, modifies edging starting at position [s, s]
-def transform_smith(matr: SparseMatrix, left: SparseMatrix, right: SparseMatrix, s: int):
+def transform_smith(matr: Matrix, left: Matrix, right: Matrix, s: int):
     move_least_to_start(matr, left, right, s)
     # ppr(matr, left, right)
 
@@ -141,7 +137,7 @@ def transform_smith(matr: SparseMatrix, left: SparseMatrix, right: SparseMatrix,
 
 
 # Checks whether south-western block of matrix, starting at pos [s, s], is zero
-def next_block_empty_or_null(matr: SparseMatrix, s: int):
+def next_block_empty_or_null(matr: Matrix, s: int):
     rows, cols = len(matr.col(0)), len(matr.row(0))
     return matr[s + 1: rows, s + 1: cols].is_zero
 
@@ -152,10 +148,10 @@ def next_block_empty_or_null(matr: SparseMatrix, s: int):
 #  - left square matrix (L)
 #  - right square matrix (R)
 #  - rank of matrix
-def smith_form(matr: SparseMatrix):
+def smith_form(matr: Matrix):
     matr = matr.copy()
     rows, cols = len(matr.col(0)), len(matr.row(0))
-    left, right = SparseMatrix.eye(rows), SparseMatrix.eye(cols)
+    left, right = Matrix.eye(rows), Matrix.eye(cols)
 
     if matr.is_zero:
         return matr, left, right, 0
@@ -171,9 +167,9 @@ def smith_form(matr: SparseMatrix):
 
 
 # Solves linear system of equations with use of Smith normal form
-def smith_solve(matr: SparseMatrix, bm: list , get_snf=False):
+def smith_solve(matr: Matrix, bm: list , get_snf=False):
     rows, cols = len(matr.col(0)), len(matr.row(0))
-    b = SparseMatrix(bm)
+    b = Matrix(bm)
 
     if rows != len(b):
         raise RuntimeError()
@@ -183,13 +179,13 @@ def smith_solve(matr: SparseMatrix, bm: list , get_snf=False):
     if rk == 0 and not b.is_zero:
         return []
     elif rk == 0 and b.is_zero:
-        return SparseMatrix.zeros(cols)
+        return Matrix.zeros(cols)
     else:
         #print("line 184")
         #pprint(b)
         #pprint(l)
         c = l * b
-        y = SparseMatrix(symbols("y:" + str(cols)))
+        y = Matrix(symbols("y:" + str(cols)))
 
         if not c[rk: rows] == [0 for i in range(rows - rk)]:
             return []
@@ -213,7 +209,7 @@ def smith_solve(matr: SparseMatrix, bm: list , get_snf=False):
 #pprint(sol)
 #symbol=sol.free_symbols
 #pprint(symbol)
-#m = matrix, SparseMatrix(b)
+#m = matrix, Matrix(b)
 #pprint(linsolve(m, symbols("y:" + str(cols))))
 """"
 Betti_number_SNF=2
@@ -242,14 +238,14 @@ for k in range(Betti_number_SNF):
         vect[i]=elem.subs(list_d[k])
         print(i,":",elem.subs(list_d[k]))
         i=i+1
-    KerM_SNF[k]=SparseMatrix(vect).copy()
+    KerM_SNF[k]=Matrix(vect).copy()
 pprint(KerM_SNF)
 pprint(matrix.nullspace())
 """
 
-#An,L,R,r=smith_form((SparseMatrix(A)))
+#An,L,R,r=smith_form((Matrix(A)))
 #print("A")
-#pprint(SparseMatrix(A))
+#pprint(Matrix(A))
 #print("SNF")
 #print("L.inv()")
 #pprint(L.inv())
@@ -258,6 +254,6 @@ pprint(matrix.nullspace())
 #print("R.inv()")
 #pprint(R.inv())
 #print("L*An*R")
-#print(SparseMatrix(A)==L.inv()*An*R.inv())
+#print(Matrix(A)==L.inv()*An*R.inv())
 #print("Rank",r)
 

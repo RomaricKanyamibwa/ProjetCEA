@@ -2,12 +2,9 @@
 """
 Created on Wed Feb 28 15:14:35 2018
 @author: HAKAM Sophia,VOISEMBERT Colette,NDAYE Ramatoulaye, KANYAMIBWA Romaric
-
 Homological group calculation
 ================
-
 Calculation of the 2nd-Homological group of a 3D solid using Sympy and Smiths Normal Form
-
 """
 
 #############################################################################
@@ -21,7 +18,7 @@ Calculation of the 2nd-Homological group of a 3D solid using Sympy and Smiths No
 #############################################################################
 import numpy as np
 from numpy.linalg import matrix_rank
-from scipy import linalg
+#from scipy import linalg
 from sympy import *
 from smith_normal_form import smith_form,smith_solve
 import sys
@@ -110,23 +107,19 @@ def get_kerM_ImM_svd(A,B):
 ImM,KerM,Betti_number=get_kerM_ImM_svd(A,B)
 print("ImM")
 pprint(ImM)
-
 #AT_A=np.matrix(np.transpose(A))*np.matrix(A)
 #B_BT=np.matrix(B)*np.matrix(np.transpose(B))
 #M=AT_A+B_BT
-
 print("KerM:")
 #for i in range(Vh.shape[0]-r):
 #    KerM[i]=np.transpose(Vh)[r+i]
-
 pprint(KerM)
-
 #Betti_number=np.matrix(KerM).shape[0]
 print("Nombre de betti",Betti_number)
 """
 
 #------------------------------------------------Calcul avec la Forme Normal de Smith------------------------------------------------
-def get_kerM_ImM_snf(A:Matrix,B:Matrix):
+def get_kerM_ImM_snf(A:SparseMatrix,B:SparseMatrix):
     M=A.T*A+B*B.T
     ncols = M.shape[1]
     b=[0]*ncols
@@ -282,7 +275,6 @@ for k in range(Betti_number_SNF):
         i=i+1
     KerM_SNF[k]=Matrix(vect).copy()
 pprint(KerM_SNF)
-
 KerM_ent=Matrix([-5, 0, -21, 16, 5, 16, -5, 0, 5, 6, -3, 4, -1, 4, 6,-1])
 """
 #for i in range(r):
@@ -305,4 +297,3 @@ if __name__ == "__main__":
         #disp=True
         print("Argv:",sys.argv[1])
         Select_Kernel_Method(SparseMatrix(A),SparseMatrix(B),int(sys.argv[1]),True)
-
