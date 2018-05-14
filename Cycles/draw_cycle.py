@@ -5,10 +5,6 @@ Created on Wed Mar 21 14:06:39 2018
 @author: colette
 """
 
-from dessine_python import *
-
-from matplotlib import pyplot as plt
-
 def draw_cycle(vect, node, elem, arrete):
     
     fig = plt.figure()
@@ -31,4 +27,4 @@ def draw_cycle(vect, node, elem, arrete):
             z = [node[s1][2],node[s2][2]]
             ax.plot(x, y, z, 'r')
             ax.axis('equal') 
-    plt.show()
+plt.show()
