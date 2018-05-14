@@ -5,9 +5,11 @@ Created on Wed Mar 21 14:06:39 2018
 @author: colette
 """
 
-from dessine_python import *
-
+import numpy as np
 from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+deux_d = False
 
 def draw_cycle(vect, node, elem, arrete):
     
@@ -31,4 +33,4 @@ def draw_cycle(vect, node, elem, arrete):
             z = [node[s1][2],node[s2][2]]
             ax.plot(x, y, z, 'r')
             ax.axis('equal') 
-    plt.show()
+plt.show()
