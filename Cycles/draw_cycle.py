@@ -5,6 +5,12 @@ Created on Wed Mar 21 14:06:39 2018
 @author: colette
 """
 
+import numpy as np
+from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+deux_d = False
+
 def draw_cycle(vect, node, elem, arrete):
     
     fig = plt.figure()
