@@ -82,7 +82,7 @@ def real_to_discr_SVD(M):
 #print(Res==M)
 
 
-def get_kerM_ImM_svd(A,B):
+def get_kerM_ImM_svd(A:SparseMatrix,B:SparseMatrix):
     AT_A=np.matrix(np.transpose(A))*np.matrix(A)
     B_BT=np.matrix(B)*np.matrix(np.transpose(B))
     M=AT_A+B_BT
@@ -90,8 +90,8 @@ def get_kerM_ImM_svd(A,B):
     r=matrix_rank(M)
     ImM=[0]*r
     KerM=[0]*(Vh.shape[0]-r)
-    Um=Matrix(U)
-    Vm=Matrix(Vh)
+    Um=SparseMatrix(U)
+    Vm=SparseMatrix(Vh)
     for i in range(r):
         #print(i)
         #print(r)
@@ -126,7 +126,7 @@ print("Nombre de betti",Betti_number)
 """
 
 #------------------------------------------------Calcul avec la Forme Normal de Smith------------------------------------------------
-def get_kerM_ImM_snf(A:Matrix,B:Matrix):
+def get_kerM_ImM_snf(A:SparseMatrix,B:SparseMatrix):
     M=A.T*A+B*B.T
     ncols = M.shape[1]
     b=[0]*ncols
@@ -169,7 +169,7 @@ def get_kerM_ImM_snf(A:Matrix,B:Matrix):
             vect[i]=elem.subs(list_d[k])
             #print(i,":",elem.subs(list_d[k]))
             i=i+1
-        KerM_SNF[k]=Matrix(vect).copy()
+        KerM_SNF[k]=SparseMatrix(vect).copy()
     #pprint(KerM_SNF)
     return M,r,ImM_SNF,KerM_SNF,Betti_number_SNF
 
@@ -179,7 +179,7 @@ def Select_Kernel_Method(A:SparseMatrix,B:SparseMatrix,method=2,display=false):
     print(B.shape)
     if(method==1):
         start_time = time.time()
-        M,r,ImM_SNF,KerM_SNF,Betti_number_SNF=get_kerM_ImM_snf(Matrix(A),Matrix(B))
+        M,r,ImM_SNF,KerM_SNF,Betti_number_SNF=get_kerM_ImM_snf(SparseMatrix(A),SparseMatrix(B))
         print("With smithsolve --- %s seconds ---" % (time.time() - start_time))
     if(method==2):#this method in general is faster
         M=A.T*A+B*B.T
@@ -191,9 +191,16 @@ def Select_Kernel_Method(A:SparseMatrix,B:SparseMatrix,method=2,display=false):
         for i in range(Betti_number_SNF):
             KerM_SNF[i]=R.col(r+i)
         print("With SNF --- %s seconds ---" % (time.time() - start_time))
-        #if(display):
-    #print("KerM_SNF:")
-    #pprint(KerM_SNF)
+    if(method==3):#this method in general is faster
+        M=A.T*A+B*B.T
+        start_time = time.time()
+        KerM_SNF=M.nullspace()
+        Betti_number_SNF=len(KerM_SNF)
+        print("Nullspace --- %s seconds ---" % (time.time() - start_time))
+    if(display):
+        print("KerM_SNF:")
+        pprint(KerM_SNF)
+        print("Betti number:",Betti_number_SNF)
     #print("KerM with Nullspace")
     #start_time = time.time()
     #(M.nullspace())
@@ -304,5 +311,5 @@ if __name__ == "__main__":
         #if (len(sys.argv) >= 3):
         #disp=True
         print("Argv:",sys.argv[1])
-        Select_Kernel_Method(SparseMatrix(A),SparseMatrix(B),int(sys.argv[1]),True)
+        Select_Kernel_Method(SparseMatrix(A),SparseMatrix(B),int(sys.argv[1]),False)
 

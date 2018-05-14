@@ -13,13 +13,15 @@ matrix = Matrix([
 
 # Vector of free members
 b = [0, 0, 0, 0, 0]
-k=0
+
+def myfunction():
+    myfunction.counter += 1
+myfunction.counter = 0
 
 def ppr(matr, left, right):
+    myfunction()
     #pprint([left, matr, right])
-    #i=k+1
-    print(":-----------------------------------------------")
-    #k=i
+    print(myfunction.counter,":-----------------------------------------------")
     return
 
 

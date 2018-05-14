@@ -27,7 +27,7 @@ def mshToPython_triangle(nom_fichier):
     for line in f1:
         ligne = line.split(' ')
         if(ligne[0]!='$EndElements\r\n' and ligne[0]!='$EndElements\n'):
-            ligne = map(int, ligne)
+            ligne = list(map(int, ligne))
             if(ligne[1]==2):
                 del ligne[1]
                 for i in range(ligne[1]+1):
