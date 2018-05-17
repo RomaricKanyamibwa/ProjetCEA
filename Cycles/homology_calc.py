@@ -172,7 +172,8 @@ def Select_Kernel_Method(A:SparseMatrix,B:SparseMatrix,method=2,display=false):
     print(B.shape)
     if(method==1):
         start_time = time.time()
-        M,r,ImM_SNF,KerM_SNF,Betti_number_SNF=get_kerM_ImM_snf(SparseMatrix(A),SparseMatrix(B))
+        #M,r,ImM_SNF,KerM_SNF,Betti_number_SNF=get_kerM_ImM_snf(SparseMatrix(A),SparseMatrix(B))
+        (ImM_SNF, KerM_SNF, Betti_number_SNF) = get_kerM_ImM_svd(SparseMatrix(A),SparseMatrix(B))
         print("With smithsolve --- %s seconds ---" % (time.time() - start_time))
     if(method==2):#this method in general is faster
         M=A.T*A+B*B.T
