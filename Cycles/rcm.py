@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 
 
 node = [[0,0,0],[0,0,1],[0,1,0],[0,1,1],[1,0,0],[1,0,1],[1,1,0],[1,1,1]]
+arete = []
 x = []
 y = []
 z = []
@@ -27,7 +28,12 @@ for i in range(len(node)):
 G = nx.Graph()
 for i in range(len(node)):
 	G.add_node(i, x=x[i], y=y[i], z=z[i])
+	
 # aretes:
+for i in range(len(arete)):
+	G.add_edge(arete[i][0][0],arete[i][0][1])
+	
+'''
 G.add_edge(3,0)
 G.add_edge(0,1)
 G.add_edge(2,1)
@@ -44,6 +50,7 @@ G.add_edge(6,5)
 G.add_edge(6,0)
 G.add_edge(7,3)
 G.add_edge(0,7)
+'''
 print(G.nodes(data=True))
 
 nx.draw(G)
