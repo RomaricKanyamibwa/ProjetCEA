@@ -59,4 +59,7 @@ plt.show()
 rcm = list(reverse_cuthill_mckee_ordering(G))
 print("ordering", rcm)
 
-
+node_res = []
+for i in range(len(rcm)):
+	node_res.append([G.node[rcm[i]]['x'],G.node[rcm[i]]['y'],G.node[rcm[i]]['z']])
+print(node_res)
